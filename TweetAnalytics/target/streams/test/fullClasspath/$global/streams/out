@@ -1,0 +1,29 @@
+[0m[[0m[0minfo[0m] [0m[0mInstrumenting 26 classes to C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\jacoco\instrumented-classes[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting products: C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes[0m
+[0m[[0m[0mdebug[0m] [0m[0mFound jacoco agent: Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\actors\TwitterActor$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\actors\TwitterActor$FilterTwitter.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\actors\TwitterActor$RegisterMsg.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\actors\TwitterActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\actors\UserActor$TwitterMessage.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\actors\UserActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\HomeController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\ReverseAssets.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\ReverseHomeController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\ReverseTwitterActionController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\routes$javascript.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\routes.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\TwitterActionController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\javascript\ReverseAssets.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\javascript\ReverseHomeController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\controllers\javascript\ReverseTwitterActionController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\router\Routes$$anonfun$routes$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\router\Routes.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\router\RoutesPrefix$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\router\RoutesPrefix.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\views\html\action$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\views\html\action.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\views\html\index$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\views\html\index.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\views\html\main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0minstrumenting C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\views\html\main.class[0m

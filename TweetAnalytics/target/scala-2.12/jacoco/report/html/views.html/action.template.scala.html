@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>action.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">action.template.scala</span></div><h1>action.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import scala.collection.JavaConverters._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.mvc.Http.Context.Implicit._
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+
+<span class="fc" id="L25">object action extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[play.mvc.Http.Request,String,play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /**/
+  def apply/*1.2*/(request: play.mvc.Http.Request)(content:String):play.twirl.api.HtmlFormat.Appendable = {
+<span class="fc" id="L29">    _display_ {</span>
+      {
+
+
+<span class="fc" id="L33">Seq[Any](format.raw/*1.50*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L34">&quot;&quot;&quot;),_display_(/*2.2*/main(request,&quot;Welcome to use TweetAnalytics!&quot;)/*2.48*/{_display_(Seq[Any](format.raw/*2.49*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L35"> &quot;&quot;&quot;),format.raw/*3.2*/(&quot;&quot;&quot;&lt;h2&gt;Welcome to use TweetAnalytics!&lt;/h2&gt;</span>
+<span class="fc" id="L36"> &lt;form action=&quot;&quot;&quot;&quot;),_display_(/*4.17*/routes/*4.23*/.TwitterActionController.search),format.raw/*4.54*/(&quot;&quot;&quot;&quot; method=&quot;get&quot;&gt;</span>
+        please enter key word: &lt;input type=&quot;text&quot; name=&quot;key&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;search&quot;&gt;
+ &lt;/form&gt;
+        
+<span class="fc" id="L41">        &quot;&quot;&quot;),_display_(/*9.10*/Html(content)),format.raw/*9.23*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L42">&quot;&quot;&quot;)))}),format.raw/*10.2*/(&quot;&quot;&quot;</span>
+
+&quot;&quot;&quot;))
+      }
+    }
+  }
+
+<span class="fc" id="L49">  def render(request:play.mvc.Http.Request,content:String): play.twirl.api.HtmlFormat.Appendable = apply(request)(content)</span>
+
+<span class="nc" id="L51">  def f:((play.mvc.Http.Request) =&gt; (String) =&gt; play.twirl.api.HtmlFormat.Appendable) = (request) =&gt; (content) =&gt; apply(request)(content)</span>
+
+<span class="nc" id="L53">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  DATE: Thu Apr 12 21:56:27 EDT 2018
+                  SOURCE: C:/Users/XieRong/Desktop/demo2/project2/TweetAnalytics/app/views/action.scala.html
+                  HASH: f294745434be1565fb537c6813b17157f8ea204d
+                  MATRIX: 971-&gt;1|1114-&gt;49|1142-&gt;52|1196-&gt;98|1234-&gt;99|1263-&gt;102|1346-&gt;159|1360-&gt;165|1411-&gt;196|1592-&gt;351|1625-&gt;364|1658-&gt;367
+                  LINES: 28-&gt;1|33-&gt;1|34-&gt;2|34-&gt;2|34-&gt;2|35-&gt;3|36-&gt;4|36-&gt;4|36-&gt;4|41-&gt;9|41-&gt;9|42-&gt;10
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

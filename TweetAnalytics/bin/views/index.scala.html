@@ -1,0 +1,10 @@
+@(request: play.mvc.Http.Request)
+
+@main(request,"Welcome to use TweetAnalytics!") {
+ <h2>Welcome to use TweetAnalytics!</h2>
+ <form action="@routes.TwitterActionController.search" method="get">
+        please enter key word: <input type="text" name="key">
+        <input type="submit" value="search">
+</form>
+}
+

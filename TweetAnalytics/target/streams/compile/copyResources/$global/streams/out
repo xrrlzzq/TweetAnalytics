@@ -1,0 +1,5 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\conf\application.conf,C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\conf\logback.xml,C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\conf\routes,C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\routes)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\conf\vssver.scc,C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\classes\vssver.scc)[0m

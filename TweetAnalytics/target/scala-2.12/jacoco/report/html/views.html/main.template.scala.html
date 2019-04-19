@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>main.template.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">views.html</a> &gt; <span class="el_source">main.template.scala</span></div><h1>main.template.scala</h1><pre class="source lang-java linenums">
+package views.html
+
+import _root_.play.twirl.api.TwirlFeatureImports._
+import _root_.play.twirl.api.TwirlHelperImports._
+import _root_.play.twirl.api.Html
+import _root_.play.twirl.api.JavaScript
+import _root_.play.twirl.api.Txt
+import _root_.play.twirl.api.Xml
+import models._
+import controllers._
+import play.api.i18n._
+import views.html._
+import play.api.templates.PlayMagic._
+import java.lang._
+import java.util._
+import scala.collection.JavaConverters._
+import play.core.j.PlayMagicForJava._
+import play.mvc._
+import play.api.data.Field
+import play.mvc.Http.Context.Implicit._
+import play.data._
+import play.core.j.PlayFormsMagicForJava._
+
+<span class="fc" id="L25">object main extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[play.mvc.Http.Request,String,Html,play.twirl.api.HtmlFormat.Appendable] {</span>
+
+  /*
+ * This template is called from the `index` template. This template
+ * handles the rendering of the page header and body tags. It takes
+ * two arguments, a `String` for the title of the page and an `Html`
+ * object to insert into the body of the page.
+ */
+  def apply/*7.2*/(request: play.mvc.Http.Request,title:String)(content: Html):play.twirl.api.HtmlFormat.Appendable = {
+<span class="fc" id="L34">    _display_ {</span>
+      {
+
+
+<span class="fc" id="L38">Seq[Any](format.raw/*7.62*/(&quot;&quot;&quot;</span>
+
+<span class="fc" id="L40">&quot;&quot;&quot;),format.raw/*9.1*/(&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+<span class="fc" id="L43">        &quot;&quot;&quot;),format.raw/*12.62*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L44">        &quot;&quot;&quot;),format.raw/*13.9*/(&quot;&quot;&quot;&lt;title&gt;&quot;&quot;&quot;),_display_(/*13.17*/title),format.raw/*13.22*/(&quot;&quot;&quot;&lt;/title&gt;</span>
+        &lt;script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js'&gt;&lt;/script&gt;
+<span class="fc" id="L46">        &lt;script type='text/javascript' src='&quot;&quot;&quot;),_display_(/*15.46*/routes/*15.52*/.Assets.at(&quot;javascripts/index.js&quot;)),format.raw/*15.86*/(&quot;&quot;&quot;'&gt;&lt;/script&gt;  </span>
+    &lt;/head&gt;
+<span class="fc" id="L48">    &lt;body data-ws-url=&quot;&quot;&quot;&quot;),_display_(/*17.25*/routes/*17.31*/.HomeController.ws.webSocketURL(request)),format.raw/*17.71*/(&quot;&quot;&quot;&quot;&gt;</span>
+<span class="fc" id="L49">        &quot;&quot;&quot;),format.raw/*19.32*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L50">        &quot;&quot;&quot;),_display_(/*20.10*/content),format.raw/*20.17*/(&quot;&quot;&quot;</span>
+<span class="fc" id="L51">        &quot;&quot;&quot;),format.raw/*21.9*/(&quot;&quot;&quot;&lt;div id=&quot;twitter&quot; style=&quot;color:green&quot;&gt; &lt;/div&gt;</span>
+    &lt;/body&gt;
+&lt;/html&gt;
+&quot;&quot;&quot;))
+      }
+    }
+  }
+
+<span class="nc" id="L59">  def render(request:play.mvc.Http.Request,title:String,content:Html): play.twirl.api.HtmlFormat.Appendable = apply(request,title)(content)</span>
+
+<span class="nc" id="L61">  def f:((play.mvc.Http.Request,String) =&gt; (Html) =&gt; play.twirl.api.HtmlFormat.Appendable) = (request,title) =&gt; (content) =&gt; apply(request,title)(content)</span>
+
+<span class="nc" id="L63">  def ref: this.type = this</span>
+
+}
+
+
+              /*
+                  -- GENERATED --
+                  DATE: Thu Apr 12 21:56:27 EDT 2018
+                  SOURCE: C:/Users/XieRong/Desktop/demo2/project2/TweetAnalytics/app/views/main.scala.html
+                  HASH: e9680d3e69c0f39e9bca42c4b5c0acfbff4f3436
+                  MATRIX: 1233-&gt;266|1388-&gt;326|1418-&gt;330|1501-&gt;438|1538-&gt;448|1573-&gt;456|1599-&gt;461|1781-&gt;616|1796-&gt;622|1851-&gt;656|1930-&gt;708|1945-&gt;714|2006-&gt;754|2046-&gt;857|2084-&gt;868|2112-&gt;875|2149-&gt;885
+                  LINES: 33-&gt;7|38-&gt;7|40-&gt;9|43-&gt;12|44-&gt;13|44-&gt;13|44-&gt;13|46-&gt;15|46-&gt;15|46-&gt;15|48-&gt;17|48-&gt;17|48-&gt;17|49-&gt;19|50-&gt;20|50-&gt;20|51-&gt;21
+                  -- GENERATED --
+              */
+          
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

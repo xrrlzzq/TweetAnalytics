@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TwitterActor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">actors</a> &gt; <span class="el_source">TwitterActor.java</span></div><h1>TwitterActor.java</h1><pre class="source lang-java linenums">package actors;
+
+
+import java.util.HashSet;
+
+
+
+import akka.actor.AbstractActorWithTimers;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import akka.actor.AbstractActor.Receive;
+
+import twitter4j.FilterQuery;
+import twitter4j.StallWarning;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
+import twitter4j.StatusListener;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.conf.ConfigurationBuilder;
+import play.mvc.Controller;
+/**
+ * The actor which get the continuously twitter informations form TwitterActionController and pass these information to UserActor
+ * 
+ * @version 1.0
+ * @author Rong Xie
+ *
+ */
+<span class="fc" id="L29">public class TwitterActor extends AbstractActorWithTimers {</span>
+<span class="fc" id="L30">private HashSet&lt;ActorRef&gt; userActors=new HashSet&lt;ActorRef&gt;();</span>
+
+private static TwitterStream twitterStream;	
+	/**
+	 * This method create a TwitterActor 
+	 * @return TwitterActor
+	 */
+    public static Props props(){
+<span class="fc" id="L38">		return Props.create(TwitterActor.class, ()-&gt;new TwitterActor());</span>
+	}
+	/**
+	 * The action to get twitterStream's instance of TwitterActor  
+	 * @return twitterStream's instance 
+	 */
+	public static TwitterStream getTwitterStream(){
+<span class="fc" id="L45">		return twitterStream;</span>
+	}
+	/**
+	 * The class which get the twitter informations from TwitterActionController
+	 * 
+	 * @version 1.0
+	 * @author Rong Xie
+	 *
+	 */
+	static public class FilterTwitter{
+	     private static String twitterInfo;
+<span class="fc" id="L56">	     public FilterTwitter(String info){</span>
+<span class="fc" id="L57">	    	 this.twitterInfo=info;</span>
+<span class="fc" id="L58">	     }</span>
+	}
+	/**
+	 * The action which tell the message(twitter informations) to each UserActor
+	 * @param ft
+	 *        FilterTwitter ft
+	 */
+	public void notifyClients(FilterTwitter ft){
+<span class="fc" id="L66">		UserActor.TwitterMessage tMsg = new UserActor.TwitterMessage(ft.twitterInfo);</span>
+<span class="fc" id="L67">		userActors.forEach(ar -&gt; ar.tell(tMsg, self()));</span>
+<span class="fc" id="L68">	}</span>
+	/**
+	 * The action is executed before creating the TwitterActor, which initializes the twitter's 
+	 * listener(including how to do when there is coming indicated twitter informations) and the 
+	 * security key of twitter api
+	 *  
+	 */
+	 @Override
+	public void preStart(){
+		
+		
+<span class="fc" id="L79">		StatusListener listener = new StatusListener() {</span>
+            @Override
+            public void onStatus(Status status) {
+                //System.out.println(&quot;@&quot; + status.getUser().getScreenName() + &quot; - &quot; + status.getText());
+<span class="nc" id="L83">               String info= String.format(&quot;&lt;a href=/profile?screenName=%s&gt;@%s&lt;/a&gt; - %s&lt;br&gt;\r\n&quot;,</span>
+<span class="nc" id="L84">                		status.getUser().getScreenName(),status.getUser().getScreenName(),status.getText());</span>
+<span class="nc" id="L85">                self().tell(new FilterTwitter(info),self());</span>
+<span class="nc" id="L86">            }</span>
+
+            @Override
+            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+<span class="nc" id="L90">                self().tell(new FilterTwitter(&quot;Got a status deletion notice id:&quot; + statusDeletionNotice.getStatusId()),self());</span>
+<span class="nc" id="L91">            }</span>
+
+            @Override
+            public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+                
+<span class="nc" id="L96">                self().tell(new FilterTwitter(&quot;Got track limitation notice:&quot; + numberOfLimitedStatuses),self());</span>
+<span class="nc" id="L97">            }</span>
+
+            @Override
+            public void onScrubGeo(long userId, long upToStatusId) {
+                
+<span class="nc" id="L102">                self().tell(new FilterTwitter(&quot;Got scrub_geo event userId:&quot; + userId + &quot; upToStatusId:&quot; + upToStatusId),self());</span>
+<span class="nc" id="L103">            }</span>
+
+            @Override
+            public void onStallWarning(StallWarning warning) {
+                
+<span class="nc" id="L108">                self().tell(new FilterTwitter(&quot;Got stall warning:&quot; + warning),self());</span>
+<span class="nc" id="L109">            }</span>
+
+            @Override
+            public void onException(Exception ex) {
+                
+<span class="nc" id="L114">                self().tell(new FilterTwitter(&quot;error:&quot; + ex.getMessage()),self());</span>
+<span class="nc" id="L115">            }</span>
+        };
+<span class="fc" id="L117">        ConfigurationBuilder cb = new ConfigurationBuilder();  </span>
+<span class="fc" id="L118">        cb.setDebugEnabled(true)  </span>
+<span class="fc" id="L119">          .setOAuthConsumerKey(&quot;cP2z03lDFfiFNhdqtwfEVDKpt&quot;)  </span>
+<span class="fc" id="L120">          .setOAuthConsumerSecret(&quot;66mEoiAoHBkaOe4wExEDo3Or8Z7y4tTNmolmQ4OTge01vEfxFV&quot;)  </span>
+<span class="fc" id="L121">          .setOAuthAccessToken(&quot;968293983964336128-637EPJ9gS66mMWOV0GYjakPn70RMGPN&quot;)  </span>
+<span class="fc" id="L122">          .setOAuthAccessTokenSecret(&quot;sa1s37RS44RdKDXuT0tv85mQ1VFWfSYGkf1ahBV0tEdzy&quot;);  </span>
+<span class="fc" id="L123">        cb.setJSONStoreEnabled(true);   </span>
+<span class="fc" id="L124">        TwitterStreamFactory tf = new TwitterStreamFactory(cb.build());  </span>
+<span class="fc" id="L125">        twitterStream = tf.getInstance(); </span>
+        
+<span class="fc" id="L127">        twitterStream.addListener(listener);</span>
+<span class="fc" id="L128">	}</span>
+	/**
+	 * The void class which is used for informing TwitterActor to add new UserActor to HashSet
+	 * 
+	 */
+<span class="fc" id="L133">	 static public class RegisterMsg{</span>
+	
+		
+	}
+	
+	/**
+	 * The method which define when TwitterActor should tell message to UserActor and when TwitterActor should add new UserActor to HashSet 
+	 * @return Receive
+	 */
+	 
+	 @Override
+	  public Receive createReceive(){
+<span class="fc" id="L145">	    	return  receiveBuilder().match(RegisterMsg.class, msg -&gt; userActors.add(sender())).</span>
+<span class="fc" id="L146">	    			match(FilterTwitter.class, this::notifyClients).build();</span>
+	    }
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

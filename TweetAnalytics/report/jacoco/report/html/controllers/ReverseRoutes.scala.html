@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReverseRoutes.scala</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">controllers</a> &gt; <span class="el_source">ReverseRoutes.scala</span></div><h1>ReverseRoutes.scala</h1><pre class="source lang-java linenums">
+// @GENERATOR:play-routes-compiler
+// @SOURCE:G:/XieRongEclipse/workspace/TweetAnalytics/conf/routes
+// @DATE:Mon Apr 09 20:03:58 EDT 2018
+
+import play.api.mvc.Call
+
+
+import _root_.controllers.Assets.Asset
+import _root_.play.libs.F
+
+// @LINE:6
+package controllers {
+
+  // @LINE:12
+<span class="fc" id="L16">  class ReverseTwitterActionController(_prefix: =&gt; String) {</span>
+    def _defaultPrefix: String = {
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
+    }
+
+  
+    // @LINE:15
+    def profile(screenName:String): Call = {
+      
+<span class="nc" id="L25">      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;profile&quot; + play.core.routing.queryString(List(Some(implicitly[play.api.mvc.QueryStringBindable[String]].unbind(&quot;screenName&quot;, screenName)))))</span>
+    }
+  
+    // @LINE:12
+    def search(): Call = {
+      
+<span class="fc" id="L31">      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;search&quot;)</span>
+    }
+  
+  }
+
+  // @LINE:6
+<span class="fc" id="L37">  class ReverseHomeController(_prefix: =&gt; String) {</span>
+    def _defaultPrefix: String = {
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
+    }
+
+  
+    // @LINE:17
+    def ws(): Call = {
+      
+<span class="fc" id="L46">      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;ws&quot;)</span>
+    }
+  
+    // @LINE:6
+    def index(): Call = {
+      
+<span class="nc" id="L52">      Call(&quot;GET&quot;, _prefix)</span>
+    }
+  
+  }
+
+  // @LINE:9
+<span class="fc" id="L58">  class ReverseAssets(_prefix: =&gt; String) {</span>
+    def _defaultPrefix: String = {
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
+    }
+
+  
+    // @LINE:9
+    def at(file:String): Call = {
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">      implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map((&quot;path&quot;, &quot;/public&quot;))); _rrc</span>
+<span class="fc" id="L67">      Call(&quot;GET&quot;, _prefix + { _defaultPrefix } + &quot;assets/&quot; + implicitly[play.api.mvc.PathBindable[String]].unbind(&quot;file&quot;, file))</span>
+    }
+  
+  }
+
+
+<span class="fc" id="L73">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

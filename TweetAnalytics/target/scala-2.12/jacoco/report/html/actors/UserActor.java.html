@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserActor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">actors</a> &gt; <span class="el_source">UserActor.java</span></div><h1>UserActor.java</h1><pre class="source lang-java linenums">package actors;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.Props;
+import play.libs.Json;
+/**
+ * The actor which get the message from TwitterActor and tell the message to the client actor
+ * 
+ * @version 1.0
+ * @author Rong Xie
+ *
+ */
+public final class UserActor extends AbstractActor {
+    private final ActorRef ws;
+    /**
+     * The constructor of UserActor which receive the client actor
+     * @param wsOut
+     *        ActorRef wsout
+     */
+<span class="fc" id="L23">    public UserActor(final ActorRef wsOut) {</span>
+<span class="fc" id="L24">    	ws =  wsOut;</span>
+<span class="fc" id="L25">    }</span>
+    /**
+     * The action which create a UserActor 
+     *  @param wsout
+     *        ActorRef wsout
+     * 
+     * @return UserActor
+     */
+    public static Props props(final ActorRef wsout) {
+<span class="fc" id="L34">        return Props.create(UserActor.class, wsout);</span>
+    }
+    /**
+     * The action is executed before creating UserActor, which informs TwitterActor to add new UserActors to TwitterActor's HashSet 
+     */
+    @Override
+    public void preStart() {
+<span class="fc" id="L41">       	context().actorSelection(&quot;/user/twitterActor/&quot;)</span>
+<span class="fc" id="L42">                 .tell(new TwitterActor.RegisterMsg(), self());</span>
+<span class="fc" id="L43">    }</span>
+    /**
+     * The class which get the twitter informations from TwitterActor
+     * 
+     * @version 1.0
+     * @author Rong Xie
+     *
+     */
+    static public class TwitterMessage{
+    	public final String info;
+    	
+<span class="fc" id="L54">    	public  TwitterMessage(String info){</span>
+<span class="fc" id="L55">    		this.info=info;</span>
+<span class="fc" id="L56">    	}</span>
+    }
+    /**
+     * The action which convert the twitter informations to Json type and send it to client actor
+     * @param msg
+     *        TwitterMessage msg
+     */
+    private void sendTwitter(TwitterMessage msg) {
+<span class="fc" id="L64">        final ObjectNode response = Json.newObject();</span>
+<span class="fc" id="L65">        response.put(&quot;twitter&quot;, msg.info);</span>
+<span class="fc" id="L66">        ws.tell(response, self());</span>
+<span class="fc" id="L67">    }</span>
+    /**
+     * The method which define when to send the message 
+     * @return Receive
+     */
+    @Override
+    public Receive createReceive(){
+<span class="fc" id="L74">    	return  receiveBuilder().match(TwitterMessage.class, this::sendTwitter).build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

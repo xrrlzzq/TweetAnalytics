@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TwitterActionController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Jacoco Coverage Report</a> &gt; <a href="index.source.html" class="el_package">controllers</a> &gt; <span class="el_source">TwitterActionController.java</span></div><h1>TwitterActionController.java</h1><pre class="source lang-java linenums">package controllers;
+
+import play.mvc.Controller;
+import play.mvc.Result;
+import twitter4j.*;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+
+import javax.inject.Inject;
+
+import actors.TwitterActor;
+import play.libs.concurrent.HttpExecutionContext;
+
+/**
+ * This controller contains actions to search Twitter key word
+ * and user profile information.
+ * 
+ * @version 1.0 
+ * @author  Rong Xie
+ */
+
+public class TwitterActionController extends Controller {
+<span class="fc" id="L24">	private static StringBuffer searchBuf = new StringBuffer();</span>
+	private HttpExecutionContext httpExecutionContext;
+<span class="fc" id="L26">	private static HashSet&lt;String&gt; track=new HashSet&lt;String&gt;();</span>
+	/**
+	 * Constructor of Controller to accept HttpExecutionContext
+	 * 
+	 * @param  ec
+	 *         HttpExecutionContext from caller
+	 */	
+	@Inject
+<span class="fc" id="L34">    public TwitterActionController(HttpExecutionContext ec) {</span>
+<span class="fc" id="L35">        this.httpExecutionContext = ec;</span>
+<span class="fc" id="L36">    }</span>
+    
+	/**
+	 * This method get the instance of TwitterActor's TwitterStream and 
+	 * use this TwitterStream instance to filter the tweets by keyword
+	 * @return &quot;ok&quot; string
+	 */
+	public CompletionStage&lt;String&gt; doTwitterFiler(){
+<span class="fc" id="L44">		  String[] trackArray = track.toArray(new String[0]);	    	  </span>
+<span class="fc" id="L45">		  TwitterStream twitterStream=TwitterActor.getTwitterStream();//get twitterStream created in TwitterActor</span>
+	  	  
+		  //filter() method internally creates a thread which manipulates TwitterStream and calls adequate listener methods continuously.
+<span class="fc" id="L48">	  	  twitterStream.filter(new FilterQuery(trackArray)); </span>
+	        	  
+<span class="fc" id="L50">		  return CompletableFuture.completedFuture(&quot;ok&quot;);</span>
+		}
+
+	/**
+	 * Controller action routed in routes file, used to search twitter
+	 * key word, executed asynchronously.
+	 * 
+     * @return html page which contains search datas
+	 */		
+	public CompletionStage&lt;Result&gt; search() {
+<span class="fc" id="L60">		return doSearch().thenApplyAsync(content -&gt; {return ok(views.html.action.render(request(),content));}, httpExecutionContext.current());</span>
+	}
+
+	/**
+	 * search twitter key word by call twitter API warped using twitter4j
+	 * 
+     * @return key word records fetched from twitter
+	 */		
+    public CompletionStage&lt;String&gt; doSearch() {
+    	String keyValue;
+    	try{
+<span class="nc" id="L71">  		    keyValue =request().getQueryString(&quot;key&quot;); // &lt;input type=&quot;text&quot; name=&quot;key&quot;&gt;</span>
+    	}
+<span class="fc" id="L73">    	catch(Exception e){</span>
+<span class="fc" id="L74">    		keyValue = &quot;concordia university&quot;; //for test purpose: Mockito does not support static Mock    		</span>
+<span class="nc" id="L75">    	}</span>
+        
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (keyValue.equals(&quot;&quot;))			</span>
+<span class="nc" id="L78">          return CompletableFuture.completedFuture(&quot;&lt;p&gt;Key word can not be empty!&quot;);</span>
+
+<span class="fc" id="L80">        String content=&quot;&quot;;</span>
+<span class="fc" id="L81">    	Twitter twitter = new TwitterFactory().getInstance();</span>
+        try {
+<span class="fc" id="L83">            Query query = new Query(keyValue);</span>
+<span class="fc" id="L84">            query.setCount(10);//set fetch count each time   </span>
+            QueryResult qr;
+<span class="fc" id="L86">            content=String.format(&quot;&lt;p&gt;keyword list for [%s]:&lt;br&gt;&lt;br&gt;\r\n&quot;,keyValue);</span>
+<span class="fc" id="L87">            qr = twitter.search(query);</span>
+<span class="fc" id="L88">            List&lt;Status&gt; tweets = qr.getTweets();</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            for (Status tweet : tweets) {</span>
+<span class="fc" id="L90">               	content=content+String.format(&quot;&lt;a href=/profile?screenName=%s&gt;@%s&lt;/a&gt; - %s&lt;br&gt;\r\n&quot;,tweet.getUser().getScreenName(),tweet.getUser().getScreenName(),tweet.getText());</span>
+<span class="fc" id="L91">            }</span>
+<span class="nc" id="L92">        } catch (TwitterException te) {</span>
+<span class="nc" id="L93">            te.printStackTrace();</span>
+<span class="nc" id="L94">            System.out.println(&quot;Failed to search tweets: &quot; + te.getMessage());</span>
+<span class="fc" id="L95">        }     	</span>
+        
+       // content = String.format(&quot;&lt;p&gt;keyword list for [%s]:&lt;br&gt;&lt;br&gt;\r\n&quot;,keyValue);
+       // content=content+String.format(&quot;&lt;a href=/profiler?screenName=%s&gt;@%s&lt;/a&gt; - How are you concordia&lt;br&gt;\r\n&quot;,&quot;BillGates&quot;,&quot;BillGates&quot;);        
+       // content=content+String.format(&quot;&lt;a href=/profiler?screenName=%s&gt;@%s&lt;/a&gt; - How are you concordia&lt;br&gt;\r\n&quot;,&quot;XR&quot;,&quot;XR&quot;);
+ 
+<span class="fc" id="L101">        searchBuf.append(content);</span>
+<span class="fc" id="L102">        track.add(keyValue);</span>
+<span class="fc" id="L103">        CompletableFuture.supplyAsync(()-&gt;doTwitterFiler());</span>
+
+<span class="fc" id="L105">        return CompletableFuture.completedFuture(searchBuf.toString());</span>
+    }
+    
+	/**
+	 * Controller action routed in routes file, used to get twitter user profile
+	 * information, executed asynchronously.
+	 * 
+     * @return html page which contains user profile datas
+	 */		
+    
+    public CompletionStage&lt;Result&gt; profile(String screenName) {
+    	
+<span class="fc" id="L117">    	return getUserProfile(screenName).thenApplyAsync(content -&gt; {return ok(views.html.action.render(request(),content));}, httpExecutionContext.current());</span>
+    }
+    
+	/**
+	 * search twitter user profile information by call twitter API warped using twitter4j
+	 * 
+     * @return user profile records fetched from twitter
+	 */		    
+    public CompletionStage&lt;String&gt; getUserProfile(String screenName) {
+<span class="fc" id="L126">    	String content=&quot;&quot;;</span>
+    	// gets Twitter instance with default credentials
+        
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">    	if(screenName.equals(&quot;Return_To_Search_List&quot;))</span>
+<span class="nc" id="L130">      	  return CompletableFuture.completedFuture(searchBuf.toString());</span>
+      	
+<span class="fc" id="L132">      	content= &quot;&lt;p&gt;&lt;a href=/profile?screenName=Return_To_Search_List&gt;Return To Search List&lt;/a&gt;&lt;br&gt;\r\n&quot;;</span>
+<span class="fc" id="L133">      	Twitter twitter = new TwitterFactory().getInstance();</span>
+        try {
+<span class="fc" id="L135">        	content=content+String.format(&quot;&lt;p&gt;profile for user [%s]:&lt;br&gt;&lt;br&gt;\r\n&quot;,screenName);</span>
+        	//user profiler
+<span class="fc" id="L137">        	User user=twitter.showUser(screenName);</span>
+        	
+        	
+<span class="fc" id="L140">            content=content+String.format(&quot;Name=%s&lt;br&gt;\r\n&quot;, user.getName());</span>
+<span class="fc" id="L141">            content=content+String.format(&quot;Email=%s&lt;br&gt;\r\n&quot;, user.getEmail());</span>
+<span class="fc" id="L142">            content=content+String.format(&quot;Location=%s&lt;br&gt;\r\n&quot;, user.getLocation());</span>
+<span class="fc" id="L143">            content=content+String.format(&quot;FollowersCount=%s&lt;br&gt;\r\n&quot;, user.getFollowersCount());</span>
+<span class="fc" id="L144">            content=content+String.format(&quot;FavouritesCount=%s&lt;br&gt;\r\n&quot;,  user.getFavouritesCount());</span>
+<span class="fc" id="L145">            content=content+String.format(&quot;Created Date=%s&lt;br&gt;\r\n&quot;, user.getCreatedAt());</span>
+<span class="fc" id="L146">            content=content+String.format(&quot;Description=%s&lt;br&gt;\r\n&quot;,user.getDescription());</span>
+            
+<span class="fc" id="L148">            content=content+String.format(&quot;&lt;p&gt;recent tweets of user [%s]:&lt;br&gt;&lt;br&gt;\r\n&quot;,screenName);</span>
+            //user tweet list
+            List&lt;Status&gt; tweets;
+<span class="fc" id="L151">            tweets = twitter.getUserTimeline(screenName); //current user: screenName = twitter.verifyCredentials().getScreenName();</span>
+
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            for (Status tweet : tweets) {</span>
+<span class="fc" id="L154">                content=content+String.format(&quot;@%s - %s&lt;br&gt;\r\n&quot;,tweet.getUser().getScreenName(),tweet.getText());</span>
+<span class="fc" id="L155">            }</span>
+<span class="nc" id="L156">        } catch (TwitterException te) {</span>
+<span class="nc" id="L157">            te.printStackTrace();</span>
+<span class="nc" id="L158">            System.out.println(&quot;Failed to get timeline: &quot; + te.getMessage());</span>
+<span class="fc" id="L159">        }   </span>
+        
+     //   content= &quot;&lt;p&gt;hello world &quot;+screenName;
+        
+<span class="fc" id="L163">        return CompletableFuture.completedFuture(content);</span>
+    }    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

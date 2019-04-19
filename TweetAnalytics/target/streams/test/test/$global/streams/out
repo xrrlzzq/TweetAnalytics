@@ -1,0 +1,39 @@
+[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector(-Djacoco-agent.destfile=C:\Users\XieRong\Desktop\demo2\project2\TweetAnalytics\target\scala-2.12\jacoco\data\jacoco.exec)[0m
+[0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunner for com.novocode.junit.JUnitFramework produced 4 initial tasks for 4 tests.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.HomeControllerTest, sbt.ForkMain$AnnotatedFingerscan@6cf27460, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m finished, took 3.375 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 3.383s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.UnitTest, sbt.ForkMain$AnnotatedFingerscan@5e09bf27, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mUnitTest[0m.[36mtestProfiler[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mUnitTest[0m.[36mtestProfiler[0m finished, took 1.913 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mUnitTest[0m.[36mcheckTemplate[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mUnitTest[0m.[36mcheckTemplate[0m finished, took 0.0 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mUnitTest[0m.[36mtestSearch[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mUnitTest[0m.[36mtestSearch[0m finished, took 0.172 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 3 total, 2.087s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 3 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.WebSocketTest, sbt.ForkMain$AnnotatedFingerscan@7522cc82, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mWebSocketTest[0m.[36mtestAcceptWebSocket[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mWebSocketTest[0m.[36mtestAcceptWebSocket[0m finished, took 1.696 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 1.697s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.ActorsTest, sbt.ForkMain$AnnotatedFingerscan@23e85bd3, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mActorsTest[0m.[36mtestActors[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mActorsTest[0m.[36mtestActors[0m finished, took 0.046 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.081s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
+[0m[[0m[0minfo[0m] [0m[0mPassed: Total 6, Failed 0, Errors 0, Passed 6[0m
+[0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.UnitTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.WebSocketTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.HomeControllerTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.ActorsTest[0m
